@@ -1,0 +1,29 @@
+version: '3'
+services:
+  gpr-reports:
+    build: ../gpr-reports
+    ports:
+      - '3000:3000'
+    depends_on:
+      - gpr-reports-api
+    volumes:
+      - ../gpr-reports:/app
+  gpr-reports-api:
+    build: ../gpr-reports-api
+    ports:
+      - '8000:80'
+    depends_on:
+      - mysql
+    volumes:
+      - ../gpr-reports-api:/app:delegated
+  mysql:
+    image: percona:8.0
+    container_name: gpr-reports-mysql
+    ports:
+      - "33072:3306/tcp"
+    command: --max_allowed_packet=104857600 --innodb-buffer-pool-size=256M
+    environment:
+      MYSQL_USER: omelya
+      MYSQL_PASSWORD: "password"
+      MYSQL_ROOT_PASSWORD: "password"
+      MYSQL_ALLOW_EMPTY_PASSWORD: "true"
