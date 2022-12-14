@@ -29,6 +29,12 @@ make build
 make install
 ```
 
+### Create .env
+
+```
+make create-env
+```
+
 ### Migrate
 
 ```
