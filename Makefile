@@ -6,11 +6,15 @@ build:
 up:
 	docker-compose up
 
+.PHONY: create-env
+create-env:
+	docker exec gpr-reports-api bash /app/docker/build/env.sh
+
 .PHONY: migrate
 migrate:
-	docker-compose exec gpr-reports-api php artisan migrate
+	docker exec gpr-reports-api php artisan migrate
 
 .PHONY: install
 install:
-	docker-compose exec gpr-reports-front npm install
-	docker-compose exec gpr-reports-api composer install
+	docker exec gpr-reports-front npm install
+	docker exec gpr-reports-api composer install
