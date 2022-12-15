@@ -6,6 +6,10 @@ build:
 up:
 	docker-compose up
 
+.PHONY: stop
+stop:
+	docker-compose stop
+
 .PHONY: create-env
 create-env:
 	docker exec gpr-reports-api bash /app/docker/build/env.sh
