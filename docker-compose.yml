@@ -19,10 +19,14 @@ services:
     container_name: gpr-reports-api
     ports:
       - '8000:80'
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
     depends_on:
       - mysql
     volumes:
       - ../gpr-reports-api:/app:delegated
+      - ../gpr-reports-api/docker/php/conf.d/xdebug.ini:/usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
+      - ../gpr-reports-api/docker/php/conf.d/error_reporting.ini:/usr/local/etc/php/conf.d/error_reporting.ini
   mysql:
     image: percona:8.0
     container_name: gpr-reports-mysql
