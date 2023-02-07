@@ -8,7 +8,12 @@ services:
     depends_on:
       - gpr-reports-api
     volumes:
-      - ../gpr-reports:/app
+      - ../gpr-reports:/app:delegated
+    command:
+      - sh
+      - -c
+      - | 
+        npm start
   gpr-reports-api:
     build: ../gpr-reports-api
     container_name: gpr-reports-api
